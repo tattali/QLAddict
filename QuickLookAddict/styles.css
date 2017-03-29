@@ -1,0 +1,41 @@
+/* Extracted and interpreted from adcstyle.css and frameset_styles.css */
+
+/* body */
+body {
+    margin: 20px 40px;
+}
+/* table */
+
+table {
+    background: #FFC4FF;
+    border-collapse: collapse;
+    border: 1px solid #009BCB;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    width: 100%;
+}
+
+table th {
+    background: #E2E2E2;
+    border: 1px solid #009BCB;
+    font-size: 12px;
+    padding: 4px 8px 4px 8px;
+}
+
+table td {
+    border: 1px solid #009BCB;
+    vertical-align: middle;
+}
+.id {
+    color: #0000FF;
+    font-weight: bold;
+    padding: 0 8px;
+    width: 1%;
+}
+.time {
+    text-align: center;
+    width: 200px;
+}
+.sub {
+    padding: 4px 2px;
+}
