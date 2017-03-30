@@ -41,8 +41,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      consoleMode = "1">
+      allowLocationSimulation = "YES">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
