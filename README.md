@@ -1,6 +1,6 @@
 # QuickLookAddict
 A QuickLook plugin that lets you view subtitles `.srt` files
-![QuickLookAddict](https://cloud.githubusercontent.com/assets/10502887/24485802/f2676c62-1506-11e7-8d4c-0973ac2dba03.png)
+![QuickLookAddict](https://cloud.githubusercontent.com/assets/10502887/24529312/1665c966-15ab-11e7-8f3f-3115a65c9453.png)
 ## Installation
 
 ### Manually
