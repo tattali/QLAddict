@@ -1,0 +1,21 @@
+build
+QLMarkdown-*.zip
+QLMarkdown/*
+*.xcodeproj/*.pbxuser
+*.xcodeproj/*.mode1v3
+*.xcodeproj/*.mode2v3
+
+# xcode noise
+*.pbxuser
+*.mode1v3
+# AppCode metadata
+.idea
+
+# Xcode 4 user noise
+*.xcworkspace
+xcuserdata
+*.perspectivev3
+
+# OSX noise
+._*
+.DS_Store

@@ -157,7 +157,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf /Users/theoattali/Library/QuickLook/QuickLookAddict.qlgenerator\ncp -av /Users/theoattali/Library/Developer/Xcode/DerivedData/QuickLookAddict-dmgipdweaarobwbdbjjujtrsczsf/Build/Products/Debug/QuickLookAddict.qlgenerator ~/Library/QuickLook/\nqlmanage -r";
+			shellScript = "rm -rf ~/Library/QuickLook/QuickLookAddict.qlgenerator\ncp -av ~/Library/Developer/Xcode/DerivedData/QuickLookAddict-dmgipdweaarobwbdbjjujtrsczsf/Build/Products/Debug/QuickLookAddict.qlgenerator ~/Library/QuickLook/\nqlmanage -r";
 		};
 /* End PBXShellScriptBuildPhase section */
 

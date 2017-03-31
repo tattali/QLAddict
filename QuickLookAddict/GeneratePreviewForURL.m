@@ -74,7 +74,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSUInteger numLines = [regex numberOfMatchesInString:content
                                                  options:0
                                                    range:NSMakeRange(0, [content length])];
-    
+
     // preview
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                       "<html>\n"
