@@ -20,9 +20,17 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                CFURLRef url, CFStringRef contentTypeUTI,
                                CFDictionaryRef options)
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *defaults = [userDefaults persistentDomainForName:@"com.sub.QuickLookAddict"];
+    
+    NSString *styleName = [defaults valueForKey:@"style"];
+    if([styleName length] == 0) {
+        styleName = @"addic7ed";
+    }
+    
     // stylesheets file
     NSString *styles = [[NSString alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:@"com.sub.QuickLookAddict"]
-                                                                                pathForResource:@"styles"
+                                                                                pathForResource:styleName
                                                                                          ofType:@"css"]
                                                        encoding:NSUTF8StringEncoding
                                                           error:nil];

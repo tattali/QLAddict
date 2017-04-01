@@ -10,7 +10,7 @@
 		0CE3C8051E8ABFB8006BA7CB /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8041E8ABFB8006BA7CB /* GenerateThumbnailForURL.m */; };
 		0CE3C8071E8ABFB8006BA7CB /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */; };
 		0CE3C8091E8ABFB8006BA7CB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8081E8ABFB8006BA7CB /* main.c */; };
-		0CE3C8111E8BE459006BA7CB /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3C8101E8BE459006BA7CB /* styles.css */; };
+		0CE3C8111E8BE459006BA7CB /* addic7ed.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3C8101E8BE459006BA7CB /* addic7ed.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,7 +19,7 @@
 		0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		0CE3C8081E8ABFB8006BA7CB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0CE3C80A1E8ABFB9006BA7CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CE3C8101E8BE459006BA7CB /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
+		0CE3C8101E8BE459006BA7CB /* addic7ed.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = addic7ed.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 		0CE3C8121E8BF584006BA7CB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0CE3C8101E8BE459006BA7CB /* styles.css */,
+				0CE3C8101E8BE459006BA7CB /* addic7ed.css */,
 			);
 			name = Resources;
 			path = QuickLookAddict;
@@ -139,7 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE3C8111E8BE459006BA7CB /* styles.css in Resources */,
+				0CE3C8111E8BE459006BA7CB /* addic7ed.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
