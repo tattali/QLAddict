@@ -12,5 +12,7 @@ A QuickLook plugin that lets you view subtitles `.srt` files
 ## Settings
 
 ### Theme
-Change theme with :
-`QuickLookAddict.qlgenerator/Contents/Resources/styles.css`
+Create a new theme : `QuickLookAddict.qlgenerator/Contents/Resources/addic7ed.css`
+
+#### Switch between themes
+	defaults write com.sub.QuickLookAddict style NAME_OF_THEME
