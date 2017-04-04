@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CB8F2DA1E9403BA00294F77 /* addic7ed-grey.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */; };
 		0CE3C8051E8ABFB8006BA7CB /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8041E8ABFB8006BA7CB /* GenerateThumbnailForURL.m */; };
 		0CE3C8071E8ABFB8006BA7CB /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */; };
 		0CE3C8091E8ABFB8006BA7CB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8081E8ABFB8006BA7CB /* main.c */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "addic7ed-grey.css"; sourceTree = "<group>"; };
 		0CE3C8011E8ABFB8006BA7CB /* QuickLookAddict.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickLookAddict.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CE3C8041E8ABFB8006BA7CB /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				0CE3C8101E8BE459006BA7CB /* addic7ed.css */,
+				0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */,
 			);
 			name = Resources;
 			path = QuickLookAddict;
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CE3C8111E8BE459006BA7CB /* addic7ed.css in Resources */,
+				0CB8F2DA1E9403BA00294F77 /* addic7ed-grey.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
