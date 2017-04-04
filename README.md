@@ -32,7 +32,7 @@ defaults write com.sub.QuickLookAddict style NAME_OF_THEME
 
 #### Create a new theme
 
-Add a new `.css` file
+Add your `.css` file with lowercase name
 
 ```
 ~/Library/QuickLook/QuickLookAddict.qlgenerator/Contents/Resources/
