@@ -24,9 +24,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     
     // command line switch theme
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] persistentDomainForName:domainName];
-    NSString *styleName = [[defaults valueForKey:@"style"] lowercaseString];
+    NSString *styleName = [defaults valueForKey:@"style"];
     
-    if ([styleName length] == 0 || [styleName isEqual:@"default"]) {
+    if (styleName == nil || [[styleName lowercaseString] isEqual:@"default"]) {
         styleName = @"addic7ed";
     }
     
