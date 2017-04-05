@@ -22,7 +22,9 @@ OSStatus GenerateThumbnailForURL(void *thisInterface,
                                  CFURLRef url, CFStringRef contentTypeUTI,
                                  CFDictionaryRef options, CGSize maxSize)
 {
-    NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url encoding:NSUTF8StringEncoding error:nil];
+    NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
+                                                 encoding:NSUTF8StringEncoding
+                                                    error:nil];
     
     if (content) {
         // Encapsulate the content of the .strings file in HTML

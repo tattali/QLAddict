@@ -26,7 +26,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] persistentDomainForName:domainName];
     NSString *styleName = [[defaults valueForKey:@"style"] lowercaseString];
     
-    if ([styleName length] == 0 || [styleName  isEqual:@"default"]) {
+    if ([styleName length] == 0 || [styleName isEqual:@"default"]) {
         styleName = @"addic7ed";
     }
     
@@ -43,46 +43,20 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
     
-    // wrap num sequence
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:@"(?m)^([0-9]+)$"
-                                  options:0 error:nil];
+    // wrap subtitle sequence
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)\r\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\\s{2}([\\s\\S]*?(?=\\s{4}|$))"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:nil];
     content = [regex stringByReplacingMatchesInString:content
                                               options:0
                                                 range:NSMakeRange(0, [content length])
-                                         withTemplate:@"<tr><td class='id'>$1</td>"];
-    
-    // wrap time sequence
-    regex = [NSRegularExpression regularExpressionWithPattern:@"(?m)^([0-9]{2}:.*-->.*,[0-9]{3})$"
-                                                      options:0
-                                                        error:nil];
-    content = [regex stringByReplacingMatchesInString:content
-                                              options:0
-                                                range:NSMakeRange(0, [content length])
-                                         withTemplate:@"<td class='time'>$1</td><td class='sub'>"];
-    
-    // sub trim
-    regex = [NSRegularExpression regularExpressionWithPattern:@"[\n\r]{3,4}"
-                                                      options:0
-                                                        error:nil];
-    content = [regex stringByReplacingMatchesInString:content
-                                              options:0
-                                                range:NSMakeRange(0, [content length])
-                                         withTemplate:@"</td></tr>"];
-    
-    regex = [NSRegularExpression regularExpressionWithPattern:@"sub'>[\n\r]{2}"
-                                                      options:0
-                                                        error:nil];
-    content = [regex stringByReplacingMatchesInString:content
-                                              options:0
-                                                range:NSMakeRange(0, [content length])
-                                         withTemplate:@"sub'>"];
+                                         withTemplate:@"<tr><td class='id'>$1</td><td class='time'>$2 --> $3</td><td class='sub'>$4</td></tr>"];
     
     // count sequence
     regex = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
                                                       options:0
                                                         error:nil];
-    NSUInteger numLines = [regex numberOfMatchesInString:content
+    NSUInteger countSequence = [regex numberOfMatchesInString:content
                                                  options:0
                                                    range:NSMakeRange(0, [content length])];
 
@@ -100,7 +74,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                       "%@"
                       "</table>\n"
                       "</body>\n"
-                      "</html>", styles, url, (unsigned long)numLines, content];
+                      "</html>", styles, url, (unsigned long)countSequence, content];
     
     QLPreviewRequestSetDataRepresentation(preview,
                                           (__bridge CFDataRef)[html dataUsingEncoding:NSUTF8StringEncoding],

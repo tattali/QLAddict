@@ -10,9 +10,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
-            <array>
-                <string>dyn.ah62d4rv4ge81g6xy</string>
-            </array>
+			<array>
+				<string>dyn.ah62d4rv4ge81g6xy</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -24,7 +24,7 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1.8</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
