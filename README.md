@@ -10,7 +10,7 @@ A QuickLook plugin that lets you view subtitles `.srt` files
 ### Manually
 
 - [Download the latest version of QuickLookAddict](https://github.com/tattali/QLAddict/releases/latest)
-- Move the downloaded .qlgenerator file to `~/Library/QuickLook`
+- Unzip and move the .qlgenerator file to `~/Library/QuickLook` (Create the QuickLook folder if it doesn’t exist)
 - Run `qlmanage -r`
 
 
@@ -32,8 +32,8 @@ defaults write com.sub.QuickLookAddict style NAME_OF_THEME
 
 #### Create a new theme
 
-Add your `.css` file with lowercase name
+Add your `.css` file
 
 ```
-~/Library/QuickLook/QuickLookAddict.qlgenerator/Contents/Resources/
+run ~/Library/QuickLook/QuickLookAddict.qlgenerator/Contents/Resources/
 ```
