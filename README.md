@@ -35,5 +35,5 @@ defaults write com.sub.QuickLookAddict style NAME_OF_THEME
 Add your `.css` file
 
 ```
-run ~/Library/QuickLook/QuickLookAddict.qlgenerator/Contents/Resources/
+open ~/Library/QuickLook/QuickLookAddict.qlgenerator/Contents/Resources/
 ```
