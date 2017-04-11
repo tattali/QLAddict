@@ -1,3 +1,22 @@
+/* basis */
+ul.infoBar {
+    padding: 0;
+    margin: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+ul.infoBar > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+
 /* body */
 body {
     margin: 20px 40px;
