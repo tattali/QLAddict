@@ -21,6 +21,12 @@ brew install qladdict
 
 ### Theme
 
+#### Switch between themes
+
+```bash
+defaults write com.sub.QuickLookAddict theme NAME_OF_THEME
+```
+
 #### Availaible themes
 
 ##### addic7ed
@@ -31,12 +37,6 @@ brew install qladdict
 
 ##### addic7ed-grey
 ![addic7ed-grey](https://cloud.githubusercontent.com/assets/10502887/24963351/a1876cd2-1f9e-11e7-8a92-a9a095f1f464.png)
-
-#### Switch between themes
-
-```bash
-defaults write com.sub.QuickLookAddict theme NAME_OF_THEME
-```
 
 #### Create a new theme
 
