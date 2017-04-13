@@ -46,7 +46,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     // Finding html tags
     NSString *tagStatus = @"";
     
-    if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[\\^>]*>"
+    if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[^>]*>"
                        options:NSRegularExpressionSearch].location == NSNotFound)
     {
         tagStatus = @"<span class=\"green\">YES</span>";
