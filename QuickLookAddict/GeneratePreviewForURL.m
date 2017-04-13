@@ -15,21 +15,20 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
    This function's job is to create preview for designated file
    ----------------------------------------------------------------------------- */
 
-
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                CFURLRef url, CFStringRef contentTypeUTI,
                                CFDictionaryRef options)
 {
     NSString *domainName = @"com.sub.QuickLookAddict";
-    
+
     // Use NSUserDefaults for theme switch
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] persistentDomainForName:domainName];
     NSString *styleName = [defaults valueForKey:@"theme"];
-    
+
     if (styleName == nil || [styleName.lowercaseString isEqual:@"default"]) {
         styleName = @"addic7ed";
     }
-    
+
     // Stylesheets
     NSString *styles = [[NSString alloc]
                         initWithContentsOfFile:[[NSBundle bundleWithIdentifier:domainName]
@@ -37,15 +36,15 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                                         ofType:@"css"]
                                       encoding:NSUTF8StringEncoding
                                          error:nil];
-    
+
     // Get content from giving url
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
-    
+
     // Finding html tags
     NSString *tagStatus = @"";
-    
+
     if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[^>]*>"
                        options:NSRegularExpressionSearch].location == NSNotFound)
     {
@@ -54,7 +53,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     else {
         tagStatus = @"<span class=\"red\">NO</span>";
     }
-    
+
     // Wrap subtitle sequence
     NSString *pattern = @"(\\d+)\r\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\r\n([\\s\\S]*?(?=(\r\n){2}|$))";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern
@@ -74,7 +73,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                     "$4"
                                                     "</td>"
                                                     "</tr>"];
-    
+
     // Count sequence
     regex = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
                                                       options:0
@@ -82,12 +81,12 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSUInteger countSequence = [regex numberOfMatchesInString:content
                                                  options:0
                                                    range:NSMakeRange(0, [content length])];
-    
+
     // Preview
     NSString *infoBar = [NSString stringWithFormat:@"<li><b>%lu</b> sequences</li>\n"
                          "<li>NoTAG : <b>%@</b></li>",
                          (unsigned long)countSequence, tagStatus];
-    
+
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                       "<html>\n"
                       "<head>\n"
@@ -102,12 +101,12 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                       "</table>\n"
                       "</body>\n"
                       "</html>", styles, url, infoBar, content];
-    
+
     QLPreviewRequestSetDataRepresentation(preview,
                                           (__bridge CFDataRef)[html dataUsingEncoding:NSUTF8StringEncoding],
                                           kUTTypeHTML,
                                           NULL);
-    
+
     return noErr;
 }
 

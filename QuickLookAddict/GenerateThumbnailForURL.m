@@ -25,18 +25,18 @@ OSStatus GenerateThumbnailForURL(void *thisInterface,
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
-    
+
     if (content) {
         // Encapsulate the content of the .strings file in HTML
         NSData *data   = [content dataUsingEncoding:NSUTF8StringEncoding];
-        
+
         NSRect _rect = NSMakeRect(0.0, 0.0, 600.0, 800.0);
         float _scale = maxSize.height / 800.0;
         NSSize _scaleSize = NSMakeSize(_scale, _scale);
         CGSize _thumbSize = NSSizeToCGSize(
                                           NSMakeSize((maxSize.width * (600.0/800.0)),
                                                      maxSize.height));
-        
+
         // Create the webview to display the thumbnail
         WebView *_webView = [[WebView alloc] initWithFrame:_rect];
         [_webView scaleUnitSquareToSize:_scaleSize];
@@ -45,10 +45,10 @@ OSStatus GenerateThumbnailForURL(void *thisInterface,
                             MIMEType:@"text/html"
                     textEncodingName:@"utf-8"
                              baseURL:nil];
-        
+
         while([_webView isLoading]) CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true);
         [_webView display];
-        
+
         // Draw the webview in the correct context
         CGContextRef _context = QLThumbnailRequestCreateContext(thumbnail, _thumbSize, false, NULL);
         if (_context) {
@@ -58,13 +58,13 @@ OSStatus GenerateThumbnailForURL(void *thisInterface,
                                                     flipped:_webView.isFlipped];
             [_webView displayRectIgnoringOpacity:_webView.bounds
                                        inContext:_graphicsContext];
-            
+
             QLThumbnailRequestFlushContext(thumbnail, _context);
-            
+
             CFRelease(_context);
         }
     }
-    
+
     return noErr;
 }
 
