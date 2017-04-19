@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "addic7ed-grey.css"; sourceTree = "<group>"; };
 		0CBD1BD61E9E75C000989C7A /* farran.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = farran.css; sourceTree = "<group>"; };
-		0CE3C8011E8ABFB8006BA7CB /* QuickLookAddict.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickLookAddict.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CE3C8011E8ABFB8006BA7CB /* QLAddict.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLAddict.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CE3C8041E8ABFB8006BA7CB /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		0CE3C8081E8ABFB8006BA7CB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 		0CE3C8021E8ABFB8006BA7CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0CE3C8011E8ABFB8006BA7CB /* QuickLookAddict.qlgenerator */,
+				0CE3C8011E8ABFB8006BA7CB /* QLAddict.qlgenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,7 +105,7 @@
 			);
 			name = QuickLookAddict;
 			productName = QuickLookAddict;
-			productReference = 0CE3C8011E8ABFB8006BA7CB /* QuickLookAddict.qlgenerator */;
+			productReference = 0CE3C8011E8ABFB8006BA7CB /* QLAddict.qlgenerator */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -165,7 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ~/Library/QuickLook/QuickLookAddict.qlgenerator\ncp -av ~/Library/Developer/Xcode/DerivedData/QuickLookAddict-dmgipdweaarobwbdbjjujtrsczsf/Build/Products/Debug/QuickLookAddict.qlgenerator ~/Library/QuickLook/\nqlmanage -r";
+			shellScript = "rm -rf ~/Library/QuickLook/QLAddict.qlgenerator\ncp -av ~/Library/Developer/Xcode/DerivedData/QuickLookAddict-dmgipdweaarobwbdbjjujtrsczsf/Build/Products/Debug/QLAddict.qlgenerator ~/Library/QuickLook/\nqlmanage -r";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -278,8 +278,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickLookAddict/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sub.QuickLookAddict;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sub.QLAddict;
+				PRODUCT_NAME = QLAddict;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Debug;
@@ -290,8 +290,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickLookAddict/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sub.QuickLookAddict;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sub.QLAddict;
+				PRODUCT_NAME = QLAddict;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;

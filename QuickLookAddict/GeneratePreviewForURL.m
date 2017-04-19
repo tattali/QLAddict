@@ -19,7 +19,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                CFURLRef url, CFStringRef contentTypeUTI,
                                CFDictionaryRef options)
 {
-    NSString *domainName = @"com.sub.QuickLookAddict";
+    NSString *domainName = @"com.sub.QLAddict";
 
     // Use NSUserDefaults for theme switch
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] persistentDomainForName:domainName];
