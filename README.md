@@ -14,7 +14,7 @@ brew cask install qladdict
 
 - [Download the latest version of QuickLookAddict](https://github.com/tattali/QLAddict/releases/latest)
 - Unzip and move the .qlgenerator file to `~/Library/QuickLook` (Create the folder if it doesn’t exist)
-- Run `qlmanage -r`
+- Run `qlmanage -r` in Terminal
 
 
 ## Settings
