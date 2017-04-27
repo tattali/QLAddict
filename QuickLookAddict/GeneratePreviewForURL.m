@@ -29,7 +29,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         styleName = @"addic7ed";
     }
 
-    // Stylesheets
+    // Import stylesheets
     NSString *styles = [[NSString alloc]
                         initWithContentsOfFile:[[NSBundle bundleWithIdentifier:domainName]
                                                                pathForResource:styleName
@@ -41,6 +41,30 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
+
+    // Get title and link
+    MDItemRef item = MDItemCreateWithURL(kCFAllocatorDefault, url);
+    NSArray *whereFroms = CFBridgingRelease(MDItemCopyAttribute(item, kMDItemWhereFroms));
+
+    NSString *titleContent = @"";
+    if (whereFroms) {
+        NSString *subtitleLink = [whereFroms lastObject];
+
+        if ([subtitleLink containsString:@"http://www.addic7ed.com/serie/"]) {
+            NSArray *splitedLink = [subtitleLink componentsSeparatedByString:@"/"];
+
+            NSString *serieTitle = splitedLink[4];
+            NSInteger seasonNumber = [splitedLink[5] intValue];
+            NSInteger episodeNumber = [splitedLink[6] intValue];
+            NSString *episodeTitle = [splitedLink[7] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+
+            titleContent = [NSString stringWithFormat:@"<h1>"
+                            "<a href=\"%@\">"
+                            "%@ S%02ldE%02ld - %@"
+                            "</a>"
+                            "</h1>", subtitleLink, serieTitle, (long)seasonNumber, (long)episodeNumber, episodeTitle];
+        }
+    }
 
     // Finding html tags
     NSString *tagStatus = @"";
@@ -55,37 +79,39 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     }
 
     // Wrap subtitle sequence
-    NSString *pattern = @"(\\d+)\r\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\r\n([\\s\\S]*?(?=(\r\n){2}|$))";
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                           options:NSRegularExpressionCaseInsensitive
-                                                                             error:nil];
-    content = [regex stringByReplacingMatchesInString:content
-                                              options:0
-                                                range:NSMakeRange(0, [content length])
-                                         withTemplate:@"<tr>"
-                                                    "<td class='id'>"
-                                                    "$1"
-                                                    "</td>"
-                                                    "<td class='time'>"
-                                                    "$2 --> $3"
-                                                    "</td>"
-                                                    "<td class='sub'>"
-                                                    "$4"
-                                                    "</td>"
-                                                    "</tr>"];
+    NSString *sequencePattern = @"(\\d+)\r\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\r\n([\\s\\S]*?(?=(\r\n){2}|$))";
+    NSRegularExpression *sequencesSelector = [NSRegularExpression regularExpressionWithPattern:sequencePattern
+                                                                                       options:NSRegularExpressionCaseInsensitive
+                                                                                         error:nil];
+    content = [sequencesSelector stringByReplacingMatchesInString:content
+                                                          options:0
+                                                            range:NSMakeRange(0, [content length])
+                                                     withTemplate:@"<tr>"
+                                                                "<td class=\"id\">"
+                                                                "$1"
+                                                                "</td>"
+                                                                "<td class=\"time\">"
+                                                                "$2 --> $3"
+                                                                "</td>"
+                                                                "<td class=\"sub\">"
+                                                                "$4"
+                                                                "</td>"
+                                                                "</tr>"];
 
     // Count sequence
-    regex = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
-                                                      options:0
-                                                        error:nil];
-    NSUInteger countSequence = [regex numberOfMatchesInString:content
-                                                 options:0
-                                                   range:NSMakeRange(0, [content length])];
+    NSRegularExpression *linesSelector = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
+                                                                                   options:0
+                                                                                     error:nil];
+    NSUInteger countSequence = [linesSelector numberOfMatchesInString:content
+                                                              options:0
+                                                                range:NSMakeRange(0, [content length])];
 
     // Preview
-    NSString *infoBar = [NSString stringWithFormat:@"<li><b>%lu</b> sequences</li>\n"
-                         "<li>NoTAG : <b>%@</b></li>",
-                         (unsigned long)countSequence, tagStatus];
+    NSString *infoBar = [NSString stringWithFormat:@"%@\n"
+                         "<ul class=\"infoBar\">\n"
+                         "<li><b>%lu</b> sequences</li>\n"
+                         "<li>NoTAG : <b>%@</b></li>"
+                         "</ul>\n", titleContent, (unsigned long)countSequence, tagStatus];
 
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                       "<html>\n"
@@ -95,7 +121,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                       "<base href=\"%@\"/>\n"
                       "</head>\n"
                       "<body>\n"
-                      "<ul class=\"infoBar\">\n%@</ul>\n"
+                      "%@"
                       "<table>\n"
                       "%@"
                       "</table>\n"
