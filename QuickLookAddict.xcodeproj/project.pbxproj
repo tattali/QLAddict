@@ -7,13 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CB8F2DA1E9403BA00294F77 /* addic7ed-grey.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */; };
-		0CBD1BD71E9E75C000989C7A /* farran.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CBD1BD61E9E75C000989C7A /* farran.css */; };
+		0C35F91F1EB54FC40088620B /* addic7ed.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CE3C8101E8BE459006BA7CB /* addic7ed.css */; };
+		0C35F9201EB54FCF0088620B /* addic7ed-grey.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */; };
+		0C35F9211EB54FD50088620B /* farran.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CBD1BD61E9E75C000989C7A /* farran.css */; };
 		0CE3C8051E8ABFB8006BA7CB /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8041E8ABFB8006BA7CB /* GenerateThumbnailForURL.m */; };
 		0CE3C8071E8ABFB8006BA7CB /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8061E8ABFB8006BA7CB /* GeneratePreviewForURL.m */; };
 		0CE3C8091E8ABFB8006BA7CB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3C8081E8ABFB8006BA7CB /* main.c */; };
-		0CE3C8111E8BE459006BA7CB /* addic7ed.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3C8101E8BE459006BA7CB /* addic7ed.css */; };
+		0CF9E8321EB54A6900AA0DDC /* base.css in Resources */ = {isa = PBXBuildFile; fileRef = 0CF9E8311EB54A6900AA0DDC /* base.css */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0C35F91E1EB54F800088620B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = themes;
+			dstSubfolderSpec = 7;
+			files = (
+				0C35F9211EB54FD50088620B /* farran.css in CopyFiles */,
+				0C35F9201EB54FCF0088620B /* addic7ed-grey.css in CopyFiles */,
+				0C35F91F1EB54FC40088620B /* addic7ed.css in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "addic7ed-grey.css"; sourceTree = "<group>"; };
@@ -24,6 +40,7 @@
 		0CE3C8081E8ABFB8006BA7CB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0CE3C80A1E8ABFB9006BA7CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CE3C8101E8BE459006BA7CB /* addic7ed.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = addic7ed.css; sourceTree = "<group>"; };
+		0CF9E8311EB54A6900AA0DDC /* base.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = base.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,12 +85,21 @@
 		0CE3C8121E8BF584006BA7CB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CF9E8311EB54A6900AA0DDC /* base.css */,
+				0CF9E8301EB54A3100AA0DDC /* themes */,
+			);
+			name = Resources;
+			path = QuickLookAddict;
+			sourceTree = "<group>";
+		};
+		0CF9E8301EB54A3100AA0DDC /* themes */ = {
+			isa = PBXGroup;
+			children = (
 				0CE3C8101E8BE459006BA7CB /* addic7ed.css */,
 				0CB8F2D91E9403BA00294F77 /* addic7ed-grey.css */,
 				0CBD1BD61E9E75C000989C7A /* farran.css */,
 			);
-			name = Resources;
-			path = QuickLookAddict;
+			name = themes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +124,7 @@
 				0CE3C7FE1E8ABFB8006BA7CB /* Headers */,
 				0CE3C7FF1E8ABFB8006BA7CB /* Resources */,
 				0C9EBD591E8D932C00D35520 /* ShellScript */,
+				0C35F91E1EB54F800088620B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -145,9 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE3C8111E8BE459006BA7CB /* addic7ed.css in Resources */,
-				0CB8F2DA1E9403BA00294F77 /* addic7ed-grey.css in Resources */,
-				0CBD1BD71E9E75C000989C7A /* farran.css in Resources */,
+				0CF9E8321EB54A6900AA0DDC /* base.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

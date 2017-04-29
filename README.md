@@ -34,5 +34,5 @@ defaults write com.sub.QLAddict theme NAME_OF_THEME
 Add your `.css` file
 
 ```bash
-open ~/Library/QuickLook/QLAddict.qlgenerator/Contents/Resources/
+open ~/Library/QuickLook/QLAddict.qlgenerator/Contents/Resources/themes/
 ```

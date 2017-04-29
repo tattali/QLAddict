@@ -30,12 +30,20 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     }
 
     // Import stylesheets
-    NSString *styles = [[NSString alloc]
-                        initWithContentsOfFile:[[NSBundle bundleWithIdentifier:domainName]
-                                                               pathForResource:styleName
-                                                                        ofType:@"css"]
-                                      encoding:NSUTF8StringEncoding
-                                         error:nil];
+    NSBundle *thisBundle = [NSBundle bundleWithIdentifier:domainName];
+
+    NSString *base = [thisBundle pathForResource:@"base"
+                                          ofType:@"css"];
+    NSString *theme = [thisBundle pathForResource:styleName
+                                           ofType:@"css"
+                                      inDirectory:@"themes"];
+
+    NSString *baseStyle = [[NSString alloc] initWithContentsOfFile:base
+                                                          encoding:NSUTF8StringEncoding
+                                                             error:nil];
+    NSString *themeStyle = [[NSString alloc] initWithContentsOfFile:theme
+                                                           encoding:NSUTF8StringEncoding
+                                                              error:nil];
 
     // Get content from giving url
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
@@ -87,16 +95,16 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                           options:0
                                                             range:NSMakeRange(0, [content length])
                                                      withTemplate:@"<tr>"
-                                                                "<td class=\"id\">"
-                                                                "$1"
-                                                                "</td>"
-                                                                "<td class=\"time\">"
-                                                                "$2 --> $3"
-                                                                "</td>"
-                                                                "<td class=\"sub\">"
-                                                                "$4"
-                                                                "</td>"
-                                                                "</tr>"];
+                                                                   "<td class=\"id\">"
+                                                                   "$1"
+                                                                   "</td>"
+                                                                   "<td class=\"time\">"
+                                                                   "$2 --> $3"
+                                                                   "</td>"
+                                                                   "<td class=\"sub\">"
+                                                                   "$4"
+                                                                   "</td>"
+                                                                   "</tr>"];
 
     // Count sequence
     NSRegularExpression *linesSelector = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
@@ -117,7 +125,8 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                       "<html>\n"
                       "<head>\n"
                       "<meta charset=\"utf-8\">\n"
-                      "<style>\n%@</style>\n"
+                      "<style type=\"text/css\">\n%@</style>\n"
+                      "<style type=\"text/css\">\n%@</style>\n"
                       "<base href=\"%@\"/>\n"
                       "</head>\n"
                       "<body>\n"
@@ -126,7 +135,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                       "%@"
                       "</table>\n"
                       "</body>\n"
-                      "</html>", styles, url, infoBar, content];
+                      "</html>", baseStyle, themeStyle, url, infoBar, content];
 
     QLPreviewRequestSetDataRepresentation(preview,
                                           (__bridge CFDataRef)[html dataUsingEncoding:NSUTF8StringEncoding],
