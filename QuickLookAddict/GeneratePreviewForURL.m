@@ -72,6 +72,13 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                             "</a>"
                             "</h1>", subtitleLink, serieTitle, (long)seasonNumber, (long)episodeNumber, episodeTitle];
         }
+        else if ([subtitleLink containsString:@"http://www.addic7ed.com/movie/"]) {
+            titleContent = [NSString stringWithFormat:@"<h1>"
+                            "<a href=\"%@\">"
+                            "Link to movie"
+                            "</a>"
+                            "</h1>", subtitleLink];
+        }
     }
 
     // Finding html tags
