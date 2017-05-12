@@ -50,6 +50,17 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
 
+    if (content == nil) {
+        content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
+                                           encoding:0
+                                              error:nil];
+    }
+    
+    content = [content stringByReplacingOccurrencesOfString:@"\r\n"
+                                                 withString:@"\n"
+                                                    options:NSLiteralSearch
+                                                      range:NSMakeRange(0, [content length])];
+
     // Get title and link
     MDItemRef item = MDItemCreateWithURL(kCFAllocatorDefault, url);
     NSArray *whereFroms = CFBridgingRelease(MDItemCopyAttribute(item, kMDItemWhereFroms));
@@ -61,16 +72,16 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         if ([subtitleLink containsString:@"http://www.addic7ed.com/serie/"]) {
             NSArray *splitedLink = [subtitleLink componentsSeparatedByString:@"/"];
 
-            NSString *serieTitle = splitedLink[4];
+            NSString *serieTitle = [[splitedLink[4] stringByReplacingOccurrencesOfString:@"_" withString:@" "] stringByRemovingPercentEncoding];
             NSInteger seasonNumber = [splitedLink[5] intValue];
             NSInteger episodeNumber = [splitedLink[6] intValue];
-            NSString *episodeTitle = [splitedLink[7] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+            NSString *episodeTitle = [[splitedLink[7] stringByReplacingOccurrencesOfString:@"_" withString:@" "] stringByRemovingPercentEncoding];
 
             titleContent = [NSString stringWithFormat:@"<h1>"
                             "<a href=\"%@\">"
-                            "%@ S%02ldE%02ld - %@"
+                            "%@ S%02tdE%02td - %@"
                             "</a>"
-                            "</h1>", subtitleLink, serieTitle, (long)seasonNumber, (long)episodeNumber, episodeTitle];
+                            "</h1>", subtitleLink, serieTitle, seasonNumber, episodeNumber, episodeTitle];
         }
         else if ([subtitleLink containsString:@"http://www.addic7ed.com/movie/"]) {
             titleContent = [NSString stringWithFormat:@"<h1>"
@@ -82,23 +93,24 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     }
 
     // Finding html tags
-    NSString *tagStatus = @"";
+    NSString *noTagStatus = @"";
 
     if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[^>]*>"
                        options:NSRegularExpressionSearch].location == NSNotFound)
     {
-        tagStatus = @"<span class=\"green\">YES</span>";
+        noTagStatus = @"<span class=\"green\">YES</span>";
     }
     else {
-        tagStatus = @"<span class=\"red\">NO</span>";
+        noTagStatus = @"<span class=\"red\">NO</span>";
     }
 
     // Wrap subtitle sequence
-    NSString *sequencePattern = @"(\\d+)\r\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\r\n([\\s\\S]*?(?=(\r\n){2}|$))";
-    NSRegularExpression *sequencesSelector = [NSRegularExpression regularExpressionWithPattern:sequencePattern
+    NSString *sequencePattern = @"(\\d+)\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\n([\\s\\S]*?(?=(\n){2}|$))";
+    NSRegularExpression *sequencesRegex = [NSRegularExpression regularExpressionWithPattern:sequencePattern
                                                                                        options:NSRegularExpressionCaseInsensitive
-                                                                                         error:nil];
-    content = [sequencesSelector stringByReplacingMatchesInString:content
+                                                                                      error:nil];
+
+    content = [sequencesRegex stringByReplacingMatchesInString:content
                                                           options:0
                                                             range:NSMakeRange(0, [content length])
                                                      withTemplate:@"<tr>"
@@ -114,19 +126,20 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                                    "</tr>"];
 
     // Count sequence
-    NSRegularExpression *linesSelector = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
+    NSRegularExpression *linesRegex = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
                                                                                    options:0
                                                                                      error:nil];
-    NSUInteger countSequence = [linesSelector numberOfMatchesInString:content
+    NSUInteger numberOfSequence = [linesRegex numberOfMatchesInString:content
                                                               options:0
                                                                 range:NSMakeRange(0, [content length])];
 
     // Preview
     NSString *infoBar = [NSString stringWithFormat:@"%@\n"
                          "<ul class=\"infoBar\">\n"
-                         "<li><b>%lu</b> sequences</li>\n"
+                         "<li><b>%tu</b> sequences</li>\n"
                          "<li>NoTAG : <b>%@</b></li>"
-                         "</ul>\n", titleContent, (unsigned long)countSequence, tagStatus];
+                         "<li><small>%@</small> / <small>%@</small></li>"
+                         "</ul>\n", titleContent, numberOfSequence, noTagStatus, noTagStatus, noTagStatus];
 
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                       "<html>\n"
