@@ -138,8 +138,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                          "<ul class=\"infoBar\">\n"
                          "<li><b>%tu</b> sequences</li>\n"
                          "<li>NoTAG : <b>%@</b></li>"
-                         "<li><small>%@</small> / <small>%@</small></li>"
-                         "</ul>\n", titleContent, numberOfSequence, noTagStatus, noTagStatus, noTagStatus];
+                         "</ul>\n", titleContent, numberOfSequence, noTagStatus];
 
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                       "<html>\n"
