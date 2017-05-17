@@ -21,15 +21,19 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 {
     NSString *domainName = @"com.sub.QLAddict";
 
-    // Use NSUserDefaults for theme switch
+    /*
+     * Use NSUserDefaults for theme switch
+     */
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults] persistentDomainForName:domainName];
-    NSString     *styleName = [defaults valueForKey:@"theme"];
+    NSString     *styleName = [[defaults valueForKey:@"theme"] lowercaseString];
 
-    if (styleName == nil || [styleName.lowercaseString isEqual:@"default"]) {
+    if (styleName == nil || [styleName isEqual:@"default"]) {
         styleName = @"addic7ed";
     }
 
-    // Import stylesheets
+    /*
+     * Import stylesheets
+     */
     NSBundle *thisBundle = [NSBundle bundleWithIdentifier:domainName];
 
     NSString *base = [thisBundle pathForResource:@"base"
@@ -45,28 +49,83 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                            encoding:NSUTF8StringEncoding
                                                               error:nil];
 
-    // Get content from giving url
+    /*
+     * Get content from giving url
+     */
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
 
+    // Allow all encoding types
     if (content == nil) {
+        // If not UTF-8
         content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                            encoding:0
                                               error:nil];
     }
 
-    content = [content stringByReplacingOccurrencesOfString:@"\r\n"
+    // Use unix line endings
+    content = [content stringByReplacingOccurrencesOfString:@"\r(\n)?"
                                                  withString:@"\n"
-                                                    options:NSLiteralSearch
+                                                    options:NSCaseInsensitiveSearch|NSRegularExpressionSearch
                                                       range:NSMakeRange(0, [content length])];
 
-    // Get title and link
+    /*
+     * Wrap subtitle sequence
+     */
+    NSString            *sequencePattern = @"(\\d+)\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\n([\\s\\S]*?(?=(\n){2}|$))";
+    NSRegularExpression *sequencesRegex = [NSRegularExpression regularExpressionWithPattern:sequencePattern
+                                                                                    options:NSRegularExpressionCaseInsensitive
+                                                                                      error:nil];
+    // Put sequence in table
+    NSString *outputContent = [sequencesRegex stringByReplacingMatchesInString:content
+                                                                       options:0
+                                                                         range:NSMakeRange(0, [content length])
+                                                                  withTemplate:@"<tr>"
+                                                                                "<td class=\"id\">"
+                                                                                "$1"
+                                                                                "</td>"
+                                                                                "<td class=\"time\">"
+                                                                                "$2 --> $3"
+                                                                                "</td>"
+                                                                                "<td class=\"sub\">"
+                                                                                "$4"
+                                                                                "</td>"
+                                                                                "</tr>"];
+
+    /*
+     * Count the sequences matched
+     */
+    NSUInteger numberOfSequence = [[outputContent componentsSeparatedByString:@"<tr>"] count] - 1;
+
+    // Test if regular srt file
+    if (numberOfSequence <= 0) {
+        return qErr;
+    }
+
+    /*
+     * Finding html tags
+     */
+    NSString *noTagStatus = @"";
+
+    if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[^>]*>"
+                       options:NSRegularExpressionSearch].location == NSNotFound)
+    {
+        noTagStatus = @"<span class=\"green\">YES</span>";
+    }
+    else {
+        noTagStatus = @"<span class=\"red\">NO</span>";
+    }
+
+    /*
+     * Get title and link
+     */
     MDItemRef item = MDItemCreateWithURL(kCFAllocatorDefault, url);
     NSArray   *whereFroms = CFBridgingRelease(MDItemCopyAttribute(item, kMDItemWhereFroms));
 
     NSString *titleContent = @"";
     if (whereFroms) {
+        // If is downloaded
         NSString *subtitleLink = [whereFroms lastObject];
 
         if ([subtitleLink containsString:@"http://www.addic7ed.com/serie/"]) {
@@ -94,47 +153,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         }
     }
 
-    // Finding html tags
-    NSString *noTagStatus = @"";
-
-    if ([content rangeOfString:@"<[A-Za-z0-9]*\\b[^>]*>"
-                       options:NSRegularExpressionSearch].location == NSNotFound)
-    {
-        noTagStatus = @"<span class=\"green\">YES</span>";
-    }
-    else {
-        noTagStatus = @"<span class=\"red\">NO</span>";
-    }
-
-    // Wrap subtitle sequence
-    NSString            *sequencePattern = @"(\\d+)\n([\\d:,]+)\\s+-{2}>\\s+([\\d:,]+)\n([\\s\\S]*?(?=(\n){2}|$))";
-    NSRegularExpression *sequencesRegex = [NSRegularExpression regularExpressionWithPattern:sequencePattern
-                                                                                    options:NSRegularExpressionCaseInsensitive
-                                                                                      error:nil];
-
-    NSString *outputContent = [sequencesRegex stringByReplacingMatchesInString:content
-                                                                       options:0
-                                                                         range:NSMakeRange(0, [content length])
-                                                                  withTemplate:@"<tr>"
-                                                                                "<td class=\"id\">"
-                                                                                "$1"
-                                                                                "</td>"
-                                                                                "<td class=\"time\">"
-                                                                                "$2 --> $3"
-                                                                                "</td>"
-                                                                                "<td class=\"sub\">"
-                                                                                "$4"
-                                                                                "</td>"
-                                                                                "</tr>"];
-
-    // Count sequence
-    NSRegularExpression *linesRegex = [NSRegularExpression regularExpressionWithPattern:@"<tr>"
-                                                                                options:0
-                                                                                  error:nil];
-    NSUInteger numberOfSequence = [linesRegex numberOfMatchesInString:outputContent
-                                                              options:0
-                                                                range:NSMakeRange(0, [outputContent length])];
-
+    /*
+     * First time of first sequence and last time of last sequence
+     */
     NSRange searchedRange = NSMakeRange(0, [content length]);
     NSRange lastMatchGroup2 = NSMakeRange(0, 12);
 
@@ -154,7 +175,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     }
     NSString *lastTime = [content substringWithRange:lastMatchGroup2];
 
-    // Preview
+    /*
+     * Preview
+     */
     NSString *infoBar = [NSString stringWithFormat:@"%@\n"
                                                     "<ul class=\"infoBar\">\n"
                                                     "<li><b>%tu</b> sequences</li>\n"
