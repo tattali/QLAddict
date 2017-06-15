@@ -1,6 +1,6 @@
 # Availaible themes
 
-### addic7ed
+### addic7ed or default
 ![addic7ed](https://cloud.githubusercontent.com/assets/10502887/24963354/a18f7c74-1f9e-11e7-8600-4047d5bfd3f6.png)
 
 ### farran
