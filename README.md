@@ -7,7 +7,11 @@ A QuickLook plugin that lets you view subtitles `.srt` files
 
 ### Homebrew
 ```bash
+# To install
 brew cask install qladdict
+
+# To update
+brew cask reinstall qladdict
 ```
 
 ### Manually
