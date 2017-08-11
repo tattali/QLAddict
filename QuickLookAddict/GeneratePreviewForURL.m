@@ -55,7 +55,25 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSString *content = [NSString stringWithContentsOfURL:(__bridge NSURL *)url
                                                  encoding:NSUTF8StringEncoding
                                                     error:nil];
-
+    
+    /*
+     * Find encoding type
+     */
+    NSPipe *pipe = [NSPipe pipe];
+    NSFileHandle *file = pipe.fileHandleForReading;
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/bin/file";
+    task.arguments = @[@"--mime-encoding", @"-b", (__bridge NSURL *)url];
+    task.standardOutput = pipe;
+    
+    [task launch];
+    
+    NSData *data = [file readDataToEndOfFile];
+    [file closeFile];
+    
+    NSString *encodingType = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] uppercaseString];
+    
     // Allow all encoding types
     if (content == nil) {
         // If not UTF-8
@@ -63,7 +81,27 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                            encoding:0
                                               error:nil];
     }
-
+    
+    /*
+     * Detect line endings
+     */
+    NSString *lineEndingType = @"";
+    
+    if ([content rangeOfString:@"\r\n"
+                       options:NSRegularExpressionSearch].location != NSNotFound)
+    {
+        lineEndingType = @"CRLF";
+    }
+    else if ([content rangeOfString:@"\r"
+                            options:NSRegularExpressionSearch].location != NSNotFound)
+    {
+        lineEndingType = @"CR";
+    }
+    else if ([content rangeOfString:@"\n"
+                            options:NSRegularExpressionSearch].location != NSNotFound)
+    {
+        lineEndingType = @"LF";
+    }
     // Use unix line endings
     content = [content stringByReplacingOccurrencesOfString:@"\r(\n)?"
                                                  withString:@"\n"
@@ -183,7 +221,11 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                                                     "<li><b>%tu</b> sequences</li>\n"
                                                     "<li>NoTAG : <b>%@</b></li>"
                                                     "<li><small>%@ | %@</small></li>"
-                                                    "</ul>\n", titleContent, numberOfSequence, noTagStatus, firstTime, lastTime];
+                                                    "</ul>\n"
+                                                    "<ul class=\"infoBar right\">\n"
+                                                    "<li>%@</li>"
+                                                    "<li>%@</li>"
+                                                    "</ul>\n", titleContent, numberOfSequence, noTagStatus, firstTime, lastTime, encodingType, lineEndingType];
 
     NSString *html = [NSString stringWithFormat:@"<!DOCTYPE html>\n"
                                                  "<html>\n"

@@ -1,5 +1,6 @@
 /* infoBar */
 ul.infoBar {
+    display: inline;
     padding: 0;
     margin: 0;
     margin-left: -5px;
@@ -9,6 +10,9 @@ ul.infoBar > li {
     display: inline-block;
     padding-right: 5px;
     padding-left: 5px;
+}
+.right {
+    float: right;
 }
 .green {
     color: green;
