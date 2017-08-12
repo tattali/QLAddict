@@ -11,7 +11,7 @@ A QuickLook plugin that lets you view subtitles `.srt` files
 brew cask install qladdict
 
 # To update
-brew cask reinstall qladdict
+brew update && brew cask reinstall qladdict
 ```
 
 ### Manually
