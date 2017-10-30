@@ -38,7 +38,7 @@ defaults write com.sub.QLAddict theme NAME_OF_THEME
 
 #### Create a new theme
 
-Add your `.css` file in lowercase title
+Add your `.css` file in lowercase title then create a pull request to share it with others
 
 ```bash
 open ~/Library/QuickLook/QLAddict.qlgenerator/Contents/Resources/themes/
