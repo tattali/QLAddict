@@ -1,0 +1,25 @@
+h1 {
+  font-size: 16px;
+  color: #566ebf;
+}
+h1 a {
+  color: #566ebf;
+  text-decoration: none;
+}
+
+h1 a:hover:before {
+  color: #566ebf;
+}
+
+/* table */
+table {
+  background: #ffc4ff;
+  border-color: #009bcb;
+}
+table td {
+  border-color: #009bcb;
+}
+
+.id {
+  color: #0000ff;
+}
