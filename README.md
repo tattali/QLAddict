@@ -23,6 +23,20 @@ brew update && brew cask reinstall qladdict
 - Unzip and move the .qlgenerator file to `~/Library/QuickLook` (Create the folder if it doesn’t exist)
 - Run `qlmanage -r` in Terminal
 
+#### Catalina
+
+Inspired by [this](https://github.com/sindresorhus/quick-look-plugins/issues/115#issuecomment-547334394) post, a process for this bundle could be:
+
+[Download the latest version of QLAddict](https://github.com/tattali/QLAddict/releases/latest) and unzip
+```
+$ mv ~/Downloads/QLMarkdown.qlgenerator ~/Library/QuickLook/QLMarkdown.qlgenerator
+$ xattr -rd com.apple.quarantine  ~/Library/QuickLook/QLMarkdown.qlgenerator
+$ qlmanage -r
+```
+_try `xattr` without `sudo`, but you can use it if needed_
+
+**Tell me in [this](https://github.com/tattali/QLAddict/issues/6) issue if this process work fine to you, if you need to use sudo or not, if you need to do extra work**
+Thank you !
 
 ## Settings
 
