@@ -29,8 +29,8 @@ Inspired by [this](https://github.com/sindresorhus/quick-look-plugins/issues/115
 
 [Download the latest version of QLAddict](https://github.com/tattali/QLAddict/releases/latest) and unzip
 ```
-$ mv ~/Downloads/QLMarkdown.qlgenerator ~/Library/QuickLook/QLMarkdown.qlgenerator
-$ xattr -rd com.apple.quarantine  ~/Library/QuickLook/QLMarkdown.qlgenerator
+$ mv ~/Downloads/QLAddict.qlgenerator ~/Library/QuickLook/QLAddict.qlgenerator
+$ xattr -rd com.apple.quarantine  ~/Library/QuickLook/QLAddict.qlgenerator
 $ qlmanage -r
 ```
 _try `xattr` without `sudo`, but you can use it if needed_
