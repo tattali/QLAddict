@@ -16,4 +16,4 @@ defaults write com.sub.QLAddict theme NAME_OF_THEME
 ![addic7ed-grey](/assets/addic7ed-grey.png)
 
 ### dark-light
-![addic7ed-grey](/assets/dark-light.png)
+![dark-light](/assets/dark-light.png)
