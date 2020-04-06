@@ -10,7 +10,10 @@ defaults write com.sub.QLAddict theme NAME_OF_THEME
 ![addic7ed](/assets/addic7ed.png)
 
 ### farran
-![farran](https://cloud.githubusercontent.com/assets/10502887/24963353/a18bc3c2-1f9e-11e7-9bf8-acf900ed37c6.png)
+![farran](/assets/farran.png)
 
 ### addic7ed-grey
-![addic7ed-grey](https://cloud.githubusercontent.com/assets/10502887/24963351/a1876cd2-1f9e-11e7-8a92-a9a095f1f464.png)
+![addic7ed-grey](/assets/addic7ed-grey.png)
+
+### dark-light
+![addic7ed-grey](/assets/dark-light.png)
