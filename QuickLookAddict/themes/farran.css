@@ -18,9 +18,15 @@ body {
 
 /* table */
 table {
-  background: #f9f9f9;
   border-color: #272822;
 }
 table td {
   border-color: #272822;
+}
+tbody tr:nth-child(odd) {
+  background-color: #f5f7fa;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e6e9ed;
 }

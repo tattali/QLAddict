@@ -4,7 +4,7 @@
 
 A QuickLook plugin that lets you view subtitles `.srt` files
 
-![qladdict](https://user-images.githubusercontent.com/10502887/29235459-4c4e6bce-7eff-11e7-8417-b8f9d3415b9d.png)
+![qladdict](/assets/default.png)
 
 ## Installation
 
