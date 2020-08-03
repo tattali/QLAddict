@@ -1,7 +1,8 @@
 h1 {
-  font-size: 16px;
   color: #566ebf;
+  font-size: 16px;
 }
+
 h1 a {
   color: #566ebf;
   text-decoration: none;
@@ -19,13 +20,13 @@ body {
 
 /* table */
 table td {
-  text-align:center;
+  text-align: center;
 }
 
 table td:nth-child(3) {
-  text-align:left;
-  padding-left: 18px;
   line-height: 150%;
+  padding-left: 18px;
+  text-align: left;
 }
 
 tbody tr:nth-child(odd) {
