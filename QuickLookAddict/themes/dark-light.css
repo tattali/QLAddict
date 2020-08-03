@@ -6,7 +6,9 @@
   --border: #d4d4d4;
   --green-color: #35b047;
   --red-color: #FF3A30;
-  --bg-color: #ffffff;
+  --bg-color: #F7F7F7;
+  --bg-odd-color: #EEEEEE;
+  --bg-even-color: #F7F7F7;
 }
 
   /* infoBar */
@@ -45,6 +47,14 @@ body {
   background-color: var(--bg-color);
 }
 
+tbody tr:nth-child(odd) {
+  background-color: var(--bg-odd-color);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--bg-even-color);
+}
+
 table {
   margin-top: 2ch;
 }
@@ -80,7 +90,7 @@ table tr td:first-child + td {
 
 table tr td:first-child + td + td {
   border-collapse: collapse;
-  vertical-align: bottom;
+  vertical-align: center;
   text-align: center;
   padding-left: 1ch;
   padding-top: 2ch;
@@ -122,5 +132,7 @@ table tr td:first-child + td + td {
     --border: #343434;
     --green-color: #62BA46;
     --red-color: #FE5258;
-    --bg-color: #1e1e1e;
+    --bg-color: #2E2D33;
+    --bg-odd-color: #515255;
+    --bg-even-color: #343236;
   }
