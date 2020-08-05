@@ -1,8 +1,8 @@
 :root {
-  --bg-color: #F7F7F7;
-  --bg-even-color: #F7F7F7;
-  --bg-odd-color: #EEEEEE;
-  --border: #d4d4d4;
+  --bg-color: #F1F1F1;
+  --bg-even-color: #F1F1F1;
+  --bg-odd-color: #FFFFFF;
+  --border: #FAFAFA;
   --green-color: #35b047;
   --index-number-text: #000000;
   --info-text: #000000;
@@ -124,15 +124,15 @@ table tr td:first-child + td + td {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #2E2D33;
-    --bg-even-color: #343236;
-    --bg-odd-color: #515255;
-    --border: #343434;
+    --bg-color: #434443;
+    --bg-even-color: #1F1F1F;
+    --bg-odd-color: #121212;
+    --border: #171717;
     --green-color: #62BA46;
     --index-number-text: #DCDCDC;
     --info-text: #ffffff;
     --red-color: #FE5258;
     --subtitle-text: #DCDCDC;
-    --time-text: #419CFF;
+    --time-text: #61ADFF;
   }
 }
