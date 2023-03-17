@@ -14,6 +14,8 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>dyn.ah62d4rv4ge81g6xy</string>
+				<string>io.mpv.subrip</string>
+				<string>com.firecore.fileformat.srt</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
