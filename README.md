@@ -1,4 +1,12 @@
 # QuickLookAddict
+
+> [!WARNING]
+> **This project is no longer maintained and will not be updated.**
+>
+> QLAddict is a Quick Look generator plugin (`.qlgenerator`). Apple has deprecated this kind of plugin in favour of Quick Look app extensions, and recent macOS versions no longer run it: users have reported it not working on macOS Catalina ([#6](https://github.com/tattali/QLAddict/issues/6), [#21](https://github.com/tattali/QLAddict/issues/21)), Big Sur ([#17](https://github.com/tattali/QLAddict/issues/17)), Sonoma ([#20](https://github.com/tattali/QLAddict/issues/20)) and macOS 26.2 Tahoe ([#22](https://github.com/tattali/QLAddict/issues/22)). The Homebrew cask has been deprecated as well. Supporting current macOS would mean rewriting it as a Quick Look app extension, which is not planned.
+>
+> The repository stays available, read-only, for reference. Thank you to everyone who used QLAddict, reported issues and contributed themes and fixes over the years.
+
 [![GitHub release](https://img.shields.io/github/release/tattali/QLAddict.svg)](https://github.com/tattali/QLAddict/releases/latest)
 [![Github Downloads](https://img.shields.io/github/downloads/tattali/QLAddict/total.svg)](https://github.com/tattali/QLAddict/releases/latest)
 
