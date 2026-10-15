@@ -133,8 +133,10 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
   /*
    * Get title and link
    */
-  MDItemRef item = MDItemCreateWithURL(kCFAllocatorDefault, url);
-  NSArray *whereFroms = CFBridgingRelease(MDItemCopyAttribute(item, kMDItemWhereFroms));
+//MDItemRef item = MDItemCreateWithURL(kCFAllocatorDefault, url);
+//CFArrayRef froms = MDItemCopyAttribute(item, kMDItemWhereFroms);
+  CFArrayRef froms = NULL;
+  NSArray *whereFroms = CFBridgingRelease(froms);
 
   NSString *titleContent = @"";
   if (whereFroms) {
